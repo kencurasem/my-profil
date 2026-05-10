@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>alan stay here</title>
+        <meta name="description" content="Kapan Ya Bareng Kamu.">
+        <meta name="keywords" content="how long will this go on?">
+        <meta property="og:title" content="Hai Cantik :)" />
+        <meta property="og:description" content="your heart shone, but he never saw it from his tower" />
+        <meta property="og:url" content="https://www.zephrine.live" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://files.catbox.moe/6y939e.jpg" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                background-color: #000;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0px;
+                overflow: hidden;
+                position: relative;
+            }
+            
+            /* Efek bintang jatuh */
+            .shooting-stars {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                pointer-events: none;
+                overflow: hidden;
+            }
+            
+            .shooting-star {
+                position: absolute;
+                background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+                border-radius: 50%;
+                opacity: 0;
+                filter: blur(1px);
+                z-index: 1;
+            }
+            
+            /* Efek bintang statis di background */
+            .starfield {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -2;
+                pointer-events: none;
+            }
+            
+            .tiny-star {
+                position: absolute;
+                border-radius: 50%;
+                animation: twinkle 3s infinite alternate;
+            }
+            
+            @keyframes twinkle {
+                0% { opacity: 0.1; }
+                50% { opacity: 1; }
+                100% { opacity: 0.1; }
+            }
+            
+            /* Profile card - tetap transparan */
+            .profile-card {
+                width: 100%;
+                max-width: 350px;
+                border-radius: 5px;
+                overflow: hidden;
+                position: relative;
+                margin-top: 5px;
+                background-color: transparent;
+                backdrop-filter: blur(5px);
+                border: none;
+                box-shadow: none;
+            }
+            
+            .profile-info {
+                text-align: center;
+                padding: 0 10px 10px; 
+            }
+            
+            .avatar-container {
+                display: inline-block;
+                border-radius: 50%;
+                padding: 3px; 
+                background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+                margin-bottom: 12px; 
+            }
+            
+            .avatar {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid #000; 
+                display: block;
+            }
+            
+            .profile-name {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 4px; 
+            }
+            
+            .name {
+              color: #fff;
+                font-size: 1.5rem; 
+                font-weight: 600;
+                margin-right: 6px;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            
+            /* DIUBAH: centang biru */
+            .verified-badge {
+                color: #1DA1F2; /* Biru Twitter/Instagram */
+                font-size: 1.1rem; 
+                text-shadow: 0 0 5px rgba(29, 161, 242, 0.5);
+            }
+            
+            .profile-bio {
+                color: #ddd;
+                font-size: 0.85rem; 
+                margin-bottom: 15px; 
+                line-height: 1.4;
+            }
+            
+            .links-section {
+                padding: 0 20px 20px; 
+            }
+            
+            /* DIUBAH: Kembalikan border merah dan shadow */
+            .link-item {
+                display: block;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 16px; 
+                border-radius: 6px; 
+                margin-bottom: 10px; 
+                text-align: center;
+                transition: all 0.5s ease;
+                /* KEMBALIKAN BORDER MERAH */
+                border: 1.2px solid #dc2743;
+                font-size: 1rem; 
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+                box-shadow: 0 0 10px rgba(220, 39, 67, 0.3); /* Shadow merah */
+            }
+            
+            /* DIUBAH: Efek hover dengan merah */
+            .link-item:hover {
+                background-color: rgba(220, 39, 67, 0.2);
+                transform: translateY(-5px);
+                border-color: #dc2743;
+                box-shadow: 0 5px 20px rgba(220, 39, 67, 0.6); /* Shadow merah lebih kuat */
+            }
+            
+            .link-icon {
+                margin-right: 6px;
+                width: 14px; 
+                text-align: center;
+                font-size: 0.9rem;
+            }
+            
+            .spotify-section {
+                padding: 0 10px 10px; 
+            }
+            
+            .spotify-embed {
+                width: 100%;
+                height: 360px; 
+                border: 0.1;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: none;
+                margin-bottom: 15px; 
+            }
+            
+            .watermark1 {
+                text-align: left;
+                color: rgba(255, 255, 255, 0.5);
+                font-style: italic;
+                font-size: 0.80rem; 
+                margin-top: 15px; 
+                padding: 15px 15px 5; 
+                line-height: 0; 
+            }
+            .watermark2 {
+                text-align: right;
+                color: rgba(255, 255, 255, 0.5);
+                font-style: italic;
+                font-size: 0.80rem; 
+                margin-top: 15px; 
+                padding: 15px 15px 5; 
+                line-height: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Background starfield -->
+        <div class="starfield" id="starfield"></div>
+        
+        <!-- Shooting stars container -->
+        <div class="shooting-stars" id="shootingStars"></div>
+      
+        <div class="profile-card">
+            <div class="profile-info">
+                <div class="avatar-container">
+                    <img src="https://files.catbox.moe/6y939e.jpg" alt="Profile" class="avatar">
+                </div>
+                
+                <div class="profile-name">
+                    <h1 class="name">@kahfimoodtzy</h1>
+                    <span class="verified-badge">
+                        <i class="fas fa-check-circle"></i>
+                    </span>
+                </div>
+                
+                <p class="profile-bio">Believe in yourself, anything is possible.</p>
+            </div>
+            
+            <div class="links-section">
+                <a href="https://instagram.com/alannvndior" class="link-item">
+                    <i class="fab fa-instagram link-icon"></i> Instagram
+                </a>
+                <a href="https://t.me/alannxd" class="link-item">
+                    <i class="fab fa-telegram link-icon"></i> Telegram
+                </a>
+                <!-- Web Shop -->
+                <a href="https://holow-hub.netlify.app" class="link-item">
+                    <i class="fas fa-shopping-cart link-icon"></i> Web Shop
+                </a>
+                <!-- About Me -->
+                <a href="https://about-alan.netlify.app" class="link-item">
+                    <i class="fas fa-user-circle link-icon"></i> About Me
+                </a>
+                <a href="https://files.catbox.moe/d765u3.jpg" class="link-item">
+                    <i class="fas fa-heart link-icon"></i> Support me
+                </a>
+            </div>
+            
+            <div class="spotify-section">
+                <iframe class="spotify-embed" src="https://open.spotify.com/embed/playlist/2WsSMEJ1TNp24Ypsxytdy9" 
+                        frameborder="5" 
+                        allowtransparency="true" 
+                        allow="encrypted-media">
+                </iframe>
+                <p class="watermark1">🦋</p>
+                <p class="watermark2">🦋</p>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Animasi untuk elemen konten
+                const elements = document.querySelectorAll('.profile-info, .links-section, .spotify-section');
+                
+                elements.forEach((element, index) => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(15px)';
+                    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 150 + (index * 150));
+                });
+                
+                // Membuat bintang statis di background
+                const starfield = document.getElementById('starfield');
+                for (let i = 0; i < 250; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('tiny-star');
+                    
+                    // Warna bintang: 50% putih, sisanya warna-warni
+                    const colorChoice = Math.random();
+                    if (colorChoice < 0.5) {
+                        star.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                    } else if (colorChoice < 0.6) {
+                        star.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
+                    } else if (colorChoice < 0.7) {
+                        star.style.backgroundColor = 'rgba(255, 255, 0, 0.8)';
+                    } else if (colorChoice < 0.8) {
+                        star.style.backgroundColor = 'rgba(0, 255, 0, 0.8)';
+                    } else if (colorChoice < 0.9) {
+                        star.style.backgroundColor = 'rgba(0, 0, 255, 0.8)';
+                    } else {
+                        star.style.backgroundColor = 'rgba(255, 0, 255, 0.8)';
+                    }
+                    
+                    const size = Math.random() * 2 + 0.5;
+                    star.style.width = size + 'px';
+                    star.style.height = size + 'px';
+                    
+                    star.style.left = Math.random() * 100 + 'vw';
+                    star.style.top = Math.random() * 100 + 'vh';
+                    
+                    star.style.opacity = Math.random() * 0.5 + 0.1;
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    star.style.animationDuration = Math.random() * 4 + 3 + 's';
+                    
+                    starfield.appendChild(star);
+                }
+                
+                // Fungsi untuk membuat bintang jatuh
+                const shootingStarsContainer = document.getElementById('shootingStars');
+                
+                function createShootingStar() {
+                    const star = document.createElement('div');
+                    star.classList.add('shooting-star');
+                    
+                    const size = Math.random() * 3 + 1.5;
+                    star.style.width = size * 25 + 'px';
+                    star.style.height = size / 1.5 + 'px';
+                    
+                    const colorChoice = Math.random();
+                    if (colorChoice < 0.7) {
+                        star.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)';
+                    } else if (colorChoice < 0.8) {
+                        star.style.background = 'linear-gradient(90deg, rgba(173,216,230,1) 0%, rgba(173,216,230,0) 100%)';
+                    } else if (colorChoice < 0.9) {
+                        star.style.background = 'linear-gradient(90deg, rgba(255,255,200,1) 0%, rgba(255,255,200,0) 100%)';
+                    } else {
+                        star.style.background = 'linear-gradient(90deg, rgba(255,182,193,1) 0%, rgba(255,182,193,0) 100%)';
+                    }
+                    
+                    const startX = 100 + Math.random() * 10;
+                    const startY = Math.random() * 30 - 10;
+                    
+                    const endX = -30;
+                    const endY = 70 + Math.random() * 30;
+                    
+                    star.style.left = startX + 'vw';
+                    star.style.top = startY + 'vh';
+                    
+                    const duration = Math.random() * 1.5 + 0.5;
+                    const delay = Math.random() * 0.5;
+                    
+                    star.style.animation = `
+                        shooting-star-animation ${duration}s linear ${delay}s forwards
+                    `;
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes shooting-star-animation {
+                            0% {
+                                transform: translate(0, 0) rotate(-45deg);
+                                opacity: 0;
+                            }
+                            10% {
+                                opacity: 1;
+                            }
+                            90% {
+                                opacity: 1;
+                            }
+                            100% {
+                                transform: translate(${endX - startX}vw, ${endY - startY}vh) rotate(-45deg);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    
+                    document.head.appendChild(style);
+                    
+                    shootingStarsContainer.appendChild(star);
+                    
+                    setTimeout(() => {
+                        if (star.parentNode) {
+                            star.parentNode.removeChild(star);
+                        }
+                        if (style.parentNode) {
+                            style.parentNode.removeChild(style);
+                        }
+                    }, (duration + delay) * 1000);
+                }
+                
+                // Fungsi untuk menghasilkan bintang jatuh secara periodik
+                function generateShootingStars() {
+                    const count = Math.floor(Math.random() * 2) + 1;
+                    
+                    for (let i = 0; i < count; i++) {
+                        setTimeout(() => {
+                            createShootingStar();
+                        }, i * 400);
+                    }
+                    
+                    const nextInterval = Math.random() * 3000 + 2000;
+                    setTimeout(generateShootingStars, nextInterval);
+                }
+                
+                setTimeout(generateShootingStars, 1500);
+                
+                // Efek hover untuk link - DIUBAH: kembali ke merah
+                const links = document.querySelectorAll('.link-item');
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        const glow = document.createElement('div');
+                        glow.style.position = 'absolute';
+                        glow.style.top = '0';
+                        glow.style.left = '0';
+                        glow.style.width = '100%';
+                        glow.style.height = '100%';
+                        glow.style.background = 'radial-gradient(circle, rgba(220,39,67,0.3) 0%, rgba(220,39,67,0) 70%)'; /* Merah */
+                        glow.style.borderRadius = '6px';
+                        glow.style.zIndex = '-1';
+                        glow.style.opacity = '0';
+                        glow.style.transition = 'opacity 0.3s';
+                        this.appendChild(glow);
+                        
+                        setTimeout(() => {
+                            glow.style.opacity = '1';
+                        }, 10);
+                        
+                        this.addEventListener('mouseleave', function() {
+                            glow.style.opacity = '0';
+                            setTimeout(() => {
+                                if (glow.parentNode === this) {
+                                    this.removeChild(glow);
+                                }
+                            }, 300);
+                        }, { once: true });
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
