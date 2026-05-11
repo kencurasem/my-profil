@@ -234,6 +234,22 @@
             font-size: .7rem; color: rgba(255,255,255,.2);
             letter-spacing: 1.5px; text-transform: uppercase;
         }
+        /* Visitor Counter */
+       .visitor-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+            animation: fadeUp .7s ease .55s both;
+            }
+.visitor-icon { color: var(--red); font-size: 13px; filter: drop-shadow(0 0 5px var(--red-dim)); }
+.visitor-label { font-size: .75rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; }
+.visitor-count { font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 700; color: var(--text); min-width: 40px; text-align: center; }
 
         @keyframes fadeUp {
             from { opacity:0; transform:translateY(24px); }
@@ -303,6 +319,13 @@
         </iframe>
     </div>
 
+
+    <div class="visitor-box">
+    <i class="fas fa-eye visitor-icon"></i>
+    <span class="visitor-label">Visitors</span>
+    <span class="visitor-count" id="visitorCount">...</span>
+    </div>
+    
     <div class="footer">
         <span class="butterfly">🦋</span>
         <span class="footer-text">kahfimoodtzy</span>
@@ -336,6 +359,24 @@ document.addEventListener('DOMContentLoaded', function () {
         starfield.appendChild(s);
     }
 
+    const countEl = document.getElementById('visitorCount');
+fetch('https://api.countapi.xyz/hit/kahfimoodtzy-profil/visits')
+    .then(r => r.json())
+    .then(data => {
+        const target = data.value;
+        const start = Math.max(0, target - 50);
+        const startTime = performance.now();
+        function tick(now) {
+            const progress = Math.min((now - startTime) / 1500, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            countEl.textContent = Math.floor(start + (target - start) * eased).toLocaleString();
+            if (progress < 1) requestAnimationFrame(tick);
+            else countEl.textContent = target.toLocaleString();
+        }
+        requestAnimationFrame(tick);
+    })
+    .catch(() => { countEl.textContent = '—'; });
+    
     const container = document.getElementById('shootingStars');
     function createShootingStar() {
         const s = document.createElement('div');
