@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>alan stay here</title>
+    <meta name="description" content="Kapan Ya Bareng Kamu.">
+    <meta name="keywords" content="how long will this go on?">
+    <meta property="og:title" content="Hai Cantik :)" />
+    <meta property="og:description" content="your heart shone, but he never saw it from his tower" />
+    <meta property="og:url" content="https://www.zephrine.live" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://files.catbox.moe/6y939e.jpg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #dc2743;
+            --red-dim: rgba(220,39,67,0.35);
+            --bg: #050505;
+            --card-bg: rgba(255,255,255,0.035);
+            --border: rgba(220,39,67,0.3);
+            --text: #f5f5f5;
+            --muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        .bg-glow {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        }
+        .bg-glow::before {
+            content: '';
+            position: absolute;
+            top: -20%; left: 50%; transform: translateX(-50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(220,39,67,0.1) 0%, transparent 65%);
+            animation: breathe 7s ease-in-out infinite;
+        }
+        .bg-glow::after {
+            content: '';
+            position: absolute;
+            bottom: -15%; right: -10%;
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(220,39,67,0.07) 0%, transparent 65%);
+            animation: breathe 9s ease-in-out infinite reverse;
+        }
+        @keyframes breathe {
+            0%,100% { opacity:.7; transform:translateX(-50%) scale(1); }
+            50% { opacity:1; transform:translateX(-50%) scale(1.12); }
+        }
+
+        .starfield, .shooting-stars {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+        }
+        .tiny-star {
+            position: absolute; border-radius: 50%;
+            animation: twinkle var(--dur,3s) ease-in-out infinite;
+            animation-delay: var(--delay,0s);
+        }
+        .shooting-star {
+            position: absolute; border-radius: 2px; opacity: 0;
+        }
+        @keyframes twinkle {
+            0%,100% { opacity:.1; } 50% { opacity:.9; }
+        }
+
+        .container {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 390px;
+            padding: 56px 18px 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* Profile */
+        .profile-info {
+            text-align: center; margin-bottom: 28px;
+            animation: fadeUp .7s ease both;
+        }
+
+        .avatar-outer {
+            display: inline-block; border-radius: 50%;
+            padding: 3px;
+            background: conic-gradient(#f09433,#e6683c,#dc2743,#cc2366,#bc1888,#f09433);
+            margin-bottom: 16px;
+            box-shadow: 0 0 30px rgba(220,39,67,0.35);
+            animation: hue-spin 5s linear infinite;
+        }
+        @keyframes hue-spin {
+            to { filter: hue-rotate(360deg); }
+        }
+        .avatar-inner {
+            border-radius: 50%; padding: 3px; background: var(--bg); display: block;
+        }
+        .avatar {
+            width: 96px; height: 96px; border-radius: 50%;
+            object-fit: cover; display: block;
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .profile-name {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; margin-bottom: 6px;
+        }
+        .name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.55rem; font-weight: 800;
+            color: var(--text); letter-spacing: -.5px;
+        }
+        .verified-badge {
+            color: #1DA1F2; font-size: 1.1rem;
+            filter: drop-shadow(0 0 5px rgba(29,161,242,0.6));
+        }
+        .profile-bio {
+            color: var(--muted); font-size: .84rem;
+            line-height: 1.5; font-style: italic; font-weight: 300;
+        }
+
+        /* Links */
+        .links-section {
+            width: 100%; display: flex; flex-direction: column;
+            gap: 11px; margin-bottom: 26px;
+        }
+
+        .link-item {
+            display: flex; align-items: center; gap: 12px;
+            color: var(--text); text-decoration: none;
+            padding: 14px 18px; border-radius: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            font-family: 'Syne', sans-serif;
+            font-size: .95rem; font-weight: 600; letter-spacing: .2px;
+            position: relative; overflow: hidden;
+            transition: all .35s cubic-bezier(.4,0,.2,1);
+            box-shadow: 0 0 12px rgba(220,39,67,.1), inset 0 1px 0 rgba(255,255,255,.05);
+            backdrop-filter: blur(8px);
+            animation: fadeUp .7s ease both;
+        }
+        .link-item::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(220,39,67,.08), transparent);
+            transform: translateX(-100%);
+            transition: transform .6s ease;
+        }
+        .link-item:hover::before { transform: translateX(100%); }
+        .link-item:hover {
+            background: rgba(220,39,67,.1);
+            border-color: rgba(220,39,67,.65);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 35px rgba(220,39,67,.25), 0 0 0 1px rgba(220,39,67,.3);
+        }
+
+        .link-icon-box {
+            width: 36px; height: 36px; border-radius: 9px;
+            background: rgba(255,255,255,.06);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; flex-shrink: 0;
+            transition: all .35s ease;
+        }
+        .link-item:hover .link-icon-box {
+            background: var(--red);
+            box-shadow: 0 0 18px var(--red-dim);
+        }
+        .link-label { flex: 1; }
+        .link-arrow {
+            color: var(--muted); font-size: 11px;
+            transition: all .3s ease;
+        }
+        .link-item:hover .link-arrow {
+            color: var(--red); transform: translateX(4px);
+        }
+
+        .link-item:nth-child(1) { animation-delay: .05s; }
+        .link-item:nth-child(2) { animation-delay: .12s; }
+        .link-item:nth-child(3) { animation-delay: .19s; }
+        .link-item:nth-child(4) { animation-delay: .26s; }
+        .link-item:nth-child(5) { animation-delay: .33s; }
+
+        /* Spotify */
+        .spotify-section {
+            width: 100%;
+            animation: fadeUp .7s ease .4s both;
+        }
+        .spotify-label {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 12px; padding-left: 4px;
+        }
+        .spotify-label i { color: #1DB954; font-size: 16px; }
+        .spotify-label span {
+            font-family: 'Syne', sans-serif;
+            font-size: .76rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--muted);
+        }
+        .spotify-embed {
+            width: 100%; height: 352px;
+            border: 0; border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            display: flex; align-items: center; justify-content: center; gap: 16px;
+            animation: fadeUp .7s ease .5s both;
+        }
+        .butterfly {
+            font-size: 1.2rem; opacity: .5;
+            animation: flutter 3s ease-in-out infinite;
+        }
+        .butterfly:last-child { animation-delay: 1.5s; }
+        @keyframes flutter {
+            0%,100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+        .footer-text {
+            font-size: .7rem; color: rgba(255,255,255,.2);
+            letter-spacing: 1.5px; text-transform: uppercase;
+        }
+
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(24px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="starfield" id="starfield"></div>
+<div class="shooting-stars" id="shootingStars"></div>
+
+<div class="container">
+
+    <div class="profile-info">
+        <div class="avatar-outer">
+            <span class="avatar-inner">
+                <img src="https://files.catbox.moe/6y939e.jpg" alt="Profile" class="avatar">
+            </span>
+        </div>
+        <div class="profile-name">
+            <h1 class="name">@kahfimoodtzy</h1>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
+        </div>
+        <p class="profile-bio">Believe in yourself, anything is possible.</p>
+    </div>
+
+    <div class="links-section">
+        <a href="https://instagram.com/alannvndior" class="link-item">
+            <div class="link-icon-box"><i class="fab fa-instagram"></i></div>
+            <span class="link-label">Instagram</span>
+            <i class="fa-solid fa-arrow-right link-arrow"></i>
+        </a>
+        <a href="https://t.me/alannxd" class="link-item">
+            <div class="link-icon-box"><i class="fab fa-telegram"></i></div>
+            <span class="link-label">Telegram</span>
+            <i class="fa-solid fa-arrow-right link-arrow"></i>
+        </a>
+        <a href="https://holow-hub.netlify.app" class="link-item">
+            <div class="link-icon-box"><i class="fas fa-shopping-cart"></i></div>
+            <span class="link-label">Web Shop</span>
+            <i class="fa-solid fa-arrow-right link-arrow"></i>
+        </a>
+        <a href="https://about-alan.netlify.app" class="link-item">
+            <div class="link-icon-box"><i class="fas fa-user-circle"></i></div>
+            <span class="link-label">About Me</span>
+            <i class="fa-solid fa-arrow-right link-arrow"></i>
+        </a>
+        <a href="https://files.catbox.moe/d765u3.jpg" class="link-item">
+            <div class="link-icon-box"><i class="fas fa-heart"></i></div>
+            <span class="link-label">Support me</span>
+            <i class="fa-solid fa-arrow-right link-arrow"></i>
+        </a>
+    </div>
+
+    <div class="spotify-section">
+        <div class="spotify-label">
+            <i class="fab fa-spotify"></i>
+            <span>Now Playing</span>
+        </div>
+        <iframe class="spotify-embed"
+            src="https://open.spotify.com/embed/playlist/2WsSMEJ1TNp24Ypsxytdy9"
+            frameborder="0"
+            allowtransparency="true"
+            allow="encrypted-media">
+        </iframe>
+    </div>
+
+    <div class="footer">
+        <span class="butterfly">🦋</span>
+        <span class="footer-text">kahfimoodtzy</span>
+        <span class="butterfly">🦋</span>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const starfield = document.getElementById('starfield');
+    const colors = [
+        'rgba(255,255,255,0.9)',
+        'rgba(220,39,67,0.7)',
+        'rgba(255,255,180,0.8)',
+        'rgba(180,220,255,0.7)',
+    ];
+    for (let i = 0; i < 220; i++) {
+        const s = document.createElement('div');
+        s.classList.add('tiny-star');
+        const size = Math.random() * 2 + 0.4;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        s.style.cssText = `
+            width:${size}px;height:${size}px;
+            left:${Math.random()*100}vw;top:${Math.random()*100}vh;
+            background:${color};
+            --dur:${(Math.random()*4+2).toFixed(1)}s;
+            --delay:${(Math.random()*5).toFixed(1)}s;
+            opacity:${(Math.random()*0.5+0.1).toFixed(2)};
+        `;
+        starfield.appendChild(s);
+    }
+
+    const container = document.getElementById('shootingStars');
+    function createShootingStar() {
+        const s = document.createElement('div');
+        s.classList.add('shooting-star');
+        const w = Math.random() * 80 + 40;
+        s.style.cssText = `
+            width:${w}px;height:${Math.random()*1.5+0.8}px;
+            left:${100+Math.random()*10}vw;
+            top:${Math.random()*40-5}vh;
+            background:linear-gradient(90deg,rgba(255,255,255,1),rgba(255,255,255,0));
+        `;
+        const dur = Math.random() * 1.2 + 0.5;
+        const endX = -(130 + Math.random() * 20);
+        const endY = 60 + Math.random() * 30;
+        container.appendChild(s);
+        const anim = s.animate([
+            { transform:'translate(0,0) rotate(-40deg)', opacity:0 },
+            { opacity:1, offset:.1 },
+            { opacity:1, offset:.9 },
+            { transform:`translate(${endX}vw,${endY}vh) rotate(-40deg)`, opacity:0 }
+        ], { duration: dur*1000, easing:'linear', fill:'forwards' });
+        anim.onfinish = () => s.remove();
+    }
+
+    function schedule() {
+        const n = Math.floor(Math.random()*2)+1;
+        for (let i=0;i<n;i++) setTimeout(createShootingStar, i*350);
+        setTimeout(schedule, Math.random()*3500+2000);
+    }
+    setTimeout(schedule, 1500);
+});
+</script>
+</body>
+</html>
